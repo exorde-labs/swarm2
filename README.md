@@ -33,13 +33,6 @@ MAIN_ADDRESS=... SPOTTERS_AMOUNT=2 docker compose up -d
 ```bash
 MAIN_ADDRESS=... docker compose up -d
 ```
-
-# 📘 How to mine EXD
-
-The client is ran using two `docker compose` files.
-- `docker-compose.yaml` : processing and web3
-- `spotters.yaml` : scraping services
-
 ## 1️⃣ Core
 | image | Image size | description | Version | Pulls |
 | --- |  --- | --- | --- | --- |
