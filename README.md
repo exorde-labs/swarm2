@@ -84,7 +84,7 @@ The `spotters.yaml` is connected with services in `docker-compose` trough a dock
 
   note: all services use port 8000
   
-  **:warning: We infer the location of each service at runtime because of live-update which cause your services location to be inconsistent in time. This is NOT an option if you want something stable, EVEN if your `spotters` are not updated the `upipe`, `bpipe` etc.. ARE**
+  **:warning: We infer the location of each service at runtime because of live-update which cause your services location to be inconsistent in time. This is NOT an option if you want something stable, EVEN if your custom `spotters` are not updated (exorde ones are) the `upipe`, `bpipe` etc.. ARE**
 
 
 
