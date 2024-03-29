@@ -1,14 +1,37 @@
 
 
-
-
-
 > - [Every repository on this subject](https://github.com/search?q=topic%3Aexorde-spot+org%3Aexorde-labs+&type=repositories)
 
 ## TLDR
 
+Our project uses Docker Compose. Please install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) using the official documentation:
+
+For windows users, once it's installed, you may have to use `powershell` or equivalent in order to type (replace ... with your `MAIN_ADDRESS`):
+
 ```
 MAIN_ADDRESS=... SPOTTERS_AMOUNT=2 docker compose up -d
+```
+This will automaticly launch 2 `spotters` and you are good to go.
+
+If you want you can increase the amount of spotters you can change `SPOTTERS_AMOUNT`
+
+### Available parameters
+- `MAIN_ADDRESS` rewarded eth wallet
+- `UPIPE_SIZE`: allow to spawn multiple `upipe` service, which are responsible for CPU unit-processing
+- `UPIPE_PROCESSING_TIMEOUT`: allows you to specify the timeout on CPU processing logic, a short time can be used on better machine while slower machine will fall in the 8s range.
+- `SPOTTER_AMOUNT` : this will spawn N `spotter` container with a repartition managed by exorde-labs. There is no conflict with a manual configuration (thanks to `spotters.yaml` and you can use both way to launch them.
+
+### More parameters (pros)
+- `TRACE`: enable tracing (this requires the `monitoring stack to be set up, please ignore if you don't know what this is)
+
+### Example
+- with automaticly managed spotters (2 spotters)
+```bash
+MAIN_ADDRESS=... SPOTTERS_AMOUNT=2 docker compose up -d
+```
+- only core
+```bash
+MAIN_ADDRESS=... docker compose up -d
 ```
 
 # 📘 How to mine EXD
@@ -24,25 +47,6 @@ The client is ran using two `docker compose` files.
 | [bpipe](https://github.com/exorde-labs/bpipe/tree/main) | ![Docker Image Size](https://img.shields.io/docker/image-size/exordelabs/bpipe) | Batch processing |  ![Docker Image Version](https://img.shields.io/docker/v/exordelabs/bpipe)| ![Docker Pulls](https://img.shields.io/docker/pulls/exordelabs/bpipe ) |
 | [upipe](https://github.com/exorde-labs/upipe/tree/main) |  ![Docker Image Size](https://img.shields.io/docker/image-size/exordelabs/upipe) | Unit processing | ![Docker Image Version](https://img.shields.io/docker/v/exordelabs/upipe)| ![Docker Pulls](https://img.shields.io/docker/pulls/exordelabs/upipe) |
 | [orchestrator](https://github.com/exorde-labs/orchestrator/tree/main) | ![Docker Image Size](https://img.shields.io/docker/image-size/exordelabs/orchestrator)| Orchestration & Monitoring | ![Docker Image Version](https://img.shields.io/docker/v/exordelabs/orchestrator)| ![Docker Pulls](https://img.shields.io/docker/pulls/exordelabs/orchestrator) |
-
-
-### Available parameters
-- `MAIN_ADDRESS` is specified as an ENV variable
-- `UPIPE_SIZE`: allow to spawn multiple `upipe` service, which are responsible for CPU unit-processing
-- `UPIPE_PROCESSING_TIMEOUT`: allows you to specify the timeout on CPU processing logic, a short time can be used on better machine while slower machine will fall in the 8s range.
-- `TRACE`: enable tracing
-- `SPOTTER_AMOUNT` : this will spawn N `spotter` container with a repartition managed by exorde-labs. There is no conflict with a manual configuration (thanks to `spotters.yaml` and you can use both way to launch them.
-
-### Example
-- with automaticly managed spotters (2 spotters)
-```bash
-MAIN_ADDRESS=... SPOTTERS_AMOUNT=2 docker compose up -d
-```
-- only core
-```bash
-MAIN_ADDRESS=... docker compose up -d
-```
-
 
 ### Custom `spotters` distribution
 
