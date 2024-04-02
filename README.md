@@ -24,6 +24,14 @@ If you want you can increase the amount of spotters you can change `SPOTTERS_AMO
 ### More parameters (pros)
 - `TRACE`: enable tracing (this requires the `monitoring stack to be set up, please ignore if you don't know what this is)
 
+### Enable GPU
+
+You can enable GPU processing on your `bpipe` instance using the `gpu.yaml`
+
+```
+MAIN_ADDRES=... docker compose -f docker-compose.yaml -f gpu.yaml up -d
+```
+
 ### Example
 - with automaticly managed spotters (2 spotters)
 ```bash

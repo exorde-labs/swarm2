@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-  
   jvc8439846094ced03ff:
     restart: always
     labels:
@@ -13,7 +12,9 @@ services:
     init: true
     deploy:
       replicas: ${jvc:-0}
-  
+    environment:
+      - TRACE=${TRACE:-false}
+ 
   bitcointalk4de40ec26:
     restart: always
     labels:
@@ -25,6 +26,9 @@ services:
     init: true
     deploy:
       replicas: ${bit:-0}
+    environment:
+      - TRACE=${TRACE:-false}
+
   
   nostr5fa856e7234fbee:
     restart: always
@@ -37,6 +41,9 @@ services:
     init: true
     deploy:
       replicas: ${nos:-0}
+    environment:
+      - TRACE=${TRACE:-false}
+
   
   seekingalphad89ba32s:
     restart: always
@@ -49,6 +56,9 @@ services:
     init: true
     deploy:
       replicas: ${see:-0}
+    environment:
+      - TRACE=${TRACE:-false}
+
   
   forocoches86019fc2d4:
     restart: always
@@ -61,6 +71,9 @@ services:
     init: true
     deploy:
       replicas: ${for:-0}
+    environment:
+      - TRACE=${TRACE:-false}
+
   
   ch4875eda56be56000ac:
     restart: always
@@ -73,7 +86,10 @@ services:
     init: true
     deploy:
       replicas: ${ch4:-0}
-  
+    environment:
+      - TRACE=${TRACE:-false}
+
+
   rss007d0675444aa13fc:
     restart: always
     labels:
@@ -85,7 +101,9 @@ services:
     init: true
     deploy:
       replicas: ${rss:-0}
-  
+    environment:
+      - TRACE=${TRACE:-false}
+
   lemmyw04b6eb792ca4a1:
     restart: always
     labels:
@@ -97,7 +115,9 @@ services:
     init: true
     deploy:
       replicas: ${lem:-0}
-  
+    environment:
+      - TRACE=${TRACE:-false}
+
   wei223be19ab11e891bo:
     restart: always
     labels:
@@ -109,7 +129,9 @@ services:
     init: true
     deploy:
       replicas: ${wei:-0}
-  
+    environment:
+      - TRACE=${TRACE:-false}
+
   hackbc9419ab11eebe56:
     restart: always
     labels:
@@ -121,7 +143,9 @@ services:
     init: true
     deploy:
       replicas: ${hac:-0}
-  
+    environment:
+      - TRACE=${TRACE:-false}
+
   masto65ezfd86424f69a:
     restart: always
     labels:
@@ -133,7 +157,9 @@ services:
     init: true
     deploy:
       replicas: ${mas:-0}
-  
+    environment:
+      - TRACE=${TRACE:-false}
+
   ap98j3envoubi3fco1kc:
     restart: always
     labels:
@@ -145,7 +171,9 @@ services:
     init: true
     deploy:
       replicas: ${ap9:-0}
-  
+    environment:
+      - TRACE=${TRACE:-false}
+
   a7df32de3a60dfdb7a0b:
     restart: always
     labels:
@@ -161,7 +189,10 @@ services:
       - SCWEET_EMAIL=${SCWEET_EMAIL}
       - SCWEET_USERNAME=${SCWEET_USERNAME}
       - SCWEET_PASSWORD=${SCWEET_PASSWORD}
-  
+      - SCWEET_COOKIE=${SCWEET_COOKIE}
+    environment:
+      - TRACE=${TRACE:-false}
+
   youtube00e1f862e5eff:
     restart: always
     labels:
@@ -173,6 +204,9 @@ services:
     init: true
     deploy:
       replicas: ${you:-0}
+    environment:
+      - TRACE=${TRACE:-false}
+
   
   followinc645fc950d7f:
     restart: always
@@ -185,6 +219,9 @@ services:
     init: true
     deploy:
       replicas: ${fol:-0}
+    environment:
+      - TRACE=${TRACE:-false}
+
   
   tradview251ae30a11ee:
     restart: always
@@ -197,6 +234,9 @@ services:
     init: true
     deploy:
       replicas: ${tra:-0}
+    environment:
+      - TRACE=${TRACE:-false}
+
 
 networks:
   exorde-network:
