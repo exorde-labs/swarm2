@@ -9,17 +9,15 @@ Our project uses Docker Compose. Please install [Docker](https://docs.docker.com
 For windows users, once it's installed, you may have to use `powershell` or equivalent in order to type (replace ... with your `MAIN_ADDRESS`):
 
 ```
-MAIN_ADDRESS=... SPOTTERS_AMOUNT=2 docker compose up -d
+MAIN_ADDRESS=... rss=1 bit=1 jvc=1 ch4=1 for=1 hac=1 mas=1 nos=1 a7d=1 ap9=1 lem=1 wei=1 fol=1 you=1 tra=1 docker compose -f spotters.yaml -f docker-compose.yaml up -d
 ```
-This will automaticly launch 2 `spotters` and you are good to go.
+This will launch a spotter for every possible driver. You are then able to configure their distribution based on your liking.
 
-If you want you can increase the amount of spotters you can change `SPOTTERS_AMOUNT`
 
 ### Available parameters
 - `MAIN_ADDRESS` rewarded eth wallet
 - `UPIPE_SIZE`: allow to spawn multiple `upipe` service, which are responsible for CPU unit-processing
 - `UPIPE_PROCESSING_TIMEOUT`: allows you to specify the timeout on CPU processing logic, a short time can be used on better machine while slower machine will fall in the 8s range.
-- `SPOTTER_AMOUNT` : this will spawn N `spotter` container with a repartition managed by exorde-labs. There is no conflict with a manual configuration (thanks to `spotters.yaml` and you can use both way to launch them.
 
 ### More parameters (pros)
 - `TRACE`: enable tracing (this requires the `monitoring stack to be set up, please ignore if you don't know what this is)
