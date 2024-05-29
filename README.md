@@ -9,7 +9,7 @@ Our project uses Docker Compose. Please install [Docker](https://docs.docker.com
 For windows users, once it's installed, you may have to use `powershell` or equivalent in order to type (replace ... with your `MAIN_ADDRESS`):
 
 ```
-MAIN_ADDRESS=... rss=1 bit=1 jvc=1 ch4=1 for=1 hac=1 mas=1 nos=1 a7d=1 ap9=1 lem=1 wei=1 fol=1 you=1 tra=1 docker compose -f spotters.yaml -f docker-compose.yaml up -d
+MAIN_ADDRESS=... rss=1 bit=1 jvc=1 ch4=1 for=1 hac=1 mas=1 nos=1 a7d=1 ap9=1 lem=1 wei=1 fol=1 you=1 tra=1 new=1 docker compose -f spotters.yaml -f docker-compose.yaml up -d
 ```
 This will launch a spotter for every possible driver. You are then able to configure their distribution based on your liking.
 
@@ -78,7 +78,7 @@ The `spotters.yaml` is connected with services in `docker-compose` trough a dock
 | [spotfollowinc645fc950d7f](https://github.com/exorde-labs/followinc645fc950d7f/tree/main) | ![Docker Image Size](https://img.shields.io/docker/image-size/exordelabs/spotfollowinc645fc950d7f) |  ![Docker Image Version](https://img.shields.io/docker/v/exordelabs/spotfollowinc645fc950d7f) | ![Docker Pulls](https://img.shields.io/docker/pulls/exordelabs/spotfollowinc645fc950d7f) | 
 | [spotyoutube00e1f862e5eff](https://github.com/exorde-labs/youtube00e1f862e5eff/tree/main) | ![Docker Image Size](https://img.shields.io/docker/image-size/exordelabs/spotyoutube00e1f862e5eff) |  ![Docker Image Version](https://img.shields.io/docker/v/exordelabs/spotyoutube00e1f862e5eff) | ![Docker Pulls](https://img.shields.io/docker/pulls/exordelabs/spotyoutube00e1f862e5eff) | 
 | [spottradview251ae30a11ee](https://github.com/exorde-labs/tradview251ae30a11ee/tree/main) | ![Docker Image Size](https://img.shields.io/docker/image-size/exordelabs/spottradview251ae30a11ee) |  ![Docker Image Version](https://img.shields.io/docker/v/exordelabs/spottradview251ae30a11ee) | ![Docker Pulls](https://img.shields.io/docker/pulls/exordelabs/spottradview251ae30a11ee) | 
-
+| [spotnews8a841d781095471c](https://github.com/exorde-labs/news8a841d781095471c/tree/main) | ![Docker Image Size](https://img.shields.io/docker/image-size/exordelabs/spotnews8a841d781095471c) |  ![Docker Image Version](https://img.shields.io/docker/v/exordelabs/spotnews8a841d781095471c) | ![Docker Pulls](https://img.shields.io/docker/pulls/exordelabs/spotnews8a841d781095471c) | 
 ### Custom Spotter Logic
 
 - Pushing data is as simple as making a `POST` request to a `upipe` instance on `/`
