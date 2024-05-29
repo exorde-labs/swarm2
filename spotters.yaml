@@ -237,6 +237,21 @@ services:
     environment:
       - TRACE=${TRACE:-false}
 
+  news8a841d781095471c:
+    restart: always
+    labels:
+        - "network.exorde.monitor=true"
+        - "network.exorde.service=spot"
+    image: exordelabs/spotnews8a841d781095471c
+    networks: 
+        - exorde-network
+    init: true
+    deploy:
+      replicas: ${new:-0}
+    environment:
+      - TRACE=${TRACE:-false}
+
+
 
 networks:
   exorde-network:
