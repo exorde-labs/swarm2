@@ -1,24 +1,43 @@
 
 
-
-
-
 > - [Every repository on this subject](https://github.com/search?q=topic%3Aexorde-spot+org%3Aexorde-labs+&type=repositories)
 
 ## TLDR
 
+Our project uses Docker Compose. Please install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) using the official documentation:
+
+For windows users, once it's installed, you may have to use `powershell` or equivalent in order to type (replace ... with your `MAIN_ADDRESS`):
+
 ```
 MAIN_ADDRESS=... rss=1 bit=1 jvc=1 ch4=1 for=1 hac=1 mas=1 nos=1 a7d=1 ap9=1 lem=1 wei=1 fol=1 you=1 tra=1 docker compose -f spotters.yaml -f docker-compose.yaml up -d
 ```
-Where each three letter code represent a `spotter` module ; 
+This will launch a spotter for every possible driver. You are then able to configure their distribution based on your liking.
 
-:warning: **There is automatic orchestration of spotters atm, configuration is completely left to you.**
 
-# 📘 How to mine EXD
+### Available parameters
+- `MAIN_ADDRESS` rewarded eth wallet
+- `UPIPE_SIZE`: allow to spawn multiple `upipe` service, which are responsible for CPU unit-processing
+- `UPIPE_PROCESSING_TIMEOUT`: allows you to specify the timeout on CPU processing logic, a short time can be used on better machine while slower machine will fall in the 8s range.
 
-The client is ran using two `docker compose` files.
-- `docker-compose.yaml` : processing and web3
-- `spotters.yaml` : scraping services
+### More parameters (pros)
+- `TRACE`: enable tracing (this requires the `monitoring stack to be set up, please ignore if you don't know what this is)
+
+### Example
+- with automaticly managed spotters (2 spotters)
+```bash
+MAIN_ADDRESS=... SPOTTERS_AMOUNT=2 docker compose up -d
+```
+- only core
+```bash
+MAIN_ADDRESS=... docker compose up -d
+```
+### Enable GPU
+
+You can enable GPU processing on your `bpipe` instance using the `gpu.yaml`
+
+```
+MAIN_ADDRES=... docker compose -f docker-compose.yaml -f gpu.yaml up -d
+```
 
 ## 1️⃣ Core
 | image | Image size | description | Version | Pulls |
@@ -28,13 +47,15 @@ The client is ran using two `docker compose` files.
 | [upipe](https://github.com/exorde-labs/upipe/tree/main) |  ![Docker Image Size](https://img.shields.io/docker/image-size/exordelabs/upipe) | Unit processing | ![Docker Image Version](https://img.shields.io/docker/v/exordelabs/upipe)| ![Docker Pulls](https://img.shields.io/docker/pulls/exordelabs/upipe) |
 | [orchestrator](https://github.com/exorde-labs/orchestrator/tree/main) | ![Docker Image Size](https://img.shields.io/docker/image-size/exordelabs/orchestrator)| Orchestration & Monitoring | ![Docker Image Version](https://img.shields.io/docker/v/exordelabs/orchestrator)| ![Docker Pulls](https://img.shields.io/docker/pulls/exordelabs/orchestrator) |
 
-- `MAIN_ADDRESS` is specified as an ENV variable
+### Custom `spotters` distribution
 
-### Example
-```bash
-MAIN_ADDRESS=... docker compose up -d
+[`spotters.yaml`](./docker-compose.yaml)  provides an easy way to launch the different spotters with different redundancy parameters, each module is parametrable with it's three first leters (jumping over `spot`)
+
+```shell
+rss=1 bit=1 jvc=1 ch4=1 for=1 hac=1 mas=1 nos=1 a7d=1 ap9=1 lem=1 wei=1 fol=1 you=1 tra=1 docker compose -f spotters.yaml up -d
 ```
-> [more parameters to buff the perf](./CUSTOMIZE.md)
+
+The `spotters.yaml` is connected with services in `docker-compose` trough a docker network called `exorde-network`. You do not have to launch them together as they will automaticly reach out. 
 
 ## :two: [Spotters](https://github.com/exorde-labs/spot/tree/main)
 > - [Every available `spot` driver repositories](https://github.com/search?q=topic%3Aexorde-spot-driver+org%3Aexorde-labs+&type=repositories)
@@ -58,16 +79,19 @@ MAIN_ADDRESS=... docker compose up -d
 | [spotyoutube00e1f862e5eff](https://github.com/exorde-labs/youtube00e1f862e5eff/tree/main) | ![Docker Image Size](https://img.shields.io/docker/image-size/exordelabs/spotyoutube00e1f862e5eff) |  ![Docker Image Version](https://img.shields.io/docker/v/exordelabs/spotyoutube00e1f862e5eff) | ![Docker Pulls](https://img.shields.io/docker/pulls/exordelabs/spotyoutube00e1f862e5eff) | 
 | [spottradview251ae30a11ee](https://github.com/exorde-labs/tradview251ae30a11ee/tree/main) | ![Docker Image Size](https://img.shields.io/docker/image-size/exordelabs/spottradview251ae30a11ee) |  ![Docker Image Version](https://img.shields.io/docker/v/exordelabs/spottradview251ae30a11ee) | ![Docker Pulls](https://img.shields.io/docker/pulls/exordelabs/spottradview251ae30a11ee) | 
 
-[`spotters.yaml`](./docker-compose.yaml)  provides an easy way to launch the different spotters with different redundancy parameters, each module is parametrable with it's three first leters (jumping over `spot`)
+### Custom Spotter Logic
 
-### Example
+- Pushing data is as simple as making a `POST` request to a `upipe` instance on `/`
+- You can use `orchestrator` to streamline the access to your different services,
+  ```
+    curl 'http://orchestrator/get?network.exorde.service=upipe' -> will return a list of `upipe` ips
+  ```
+  You select a random one and are ready to push data
 
-```shell
-rss=2 docker compose up -d -f spotters.yaml
-```
-Will launch two rss instances.
+  note: all services use port 8000
+  
+  **:warning: We infer the location of each service at runtime because of live-update which cause your services location to be inconsistent in time. This is NOT an option if you want something stable, EVEN if your custom `spotters` are not updated (exorde ones are) the `upipe`, `bpipe` etc.. ARE**
 
 
-### :warning: Important
-- There is **no orchestration mechanism** when you launch your spotters this way.
-- They will be staticly launched and **the module distribution usage is 100% under your control.**
+
+  
