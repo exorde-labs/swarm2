@@ -190,7 +190,6 @@ services:
       - SCWEET_USERNAME=${SCWEET_USERNAME}
       - SCWEET_PASSWORD=${SCWEET_PASSWORD}
       - SCWEET_COOKIE=${SCWEET_COOKIE}
-    environment:
       - TRACE=${TRACE:-false}
 
   youtube00e1f862e5eff:
